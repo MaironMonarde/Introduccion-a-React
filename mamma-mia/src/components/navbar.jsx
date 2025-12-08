@@ -1,9 +1,8 @@
 import React from "react";
 import { formatNumber } from "../utils/format";
 
-const Navbar = () => {
+const Navbar = ({setView, token}) => {
     const total = 25000;
-    const token = false;
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
@@ -12,7 +11,12 @@ const Navbar = () => {
 
             <div className="d-flex gap-2">
             {}
-            <button className="btn btn-outline-primary">🍕 Home</button>
+            <button
+                className="btn btn-outline-primary"
+                onClick={() => setView("home")}
+                >
+                🍕 Home
+                </button>
 
             {}
             {token ? (
@@ -22,8 +26,19 @@ const Navbar = () => {
                 </>
             ) : (
                 <>
-                <button className="btn btn-outline-success">🔐 Login</button>
-                <button className="btn btn-outline-warning">🔐 Register</button>
+                <button
+                    className="btn btn-outline-success"
+                    onClick={() => setView("login")}
+                    >
+                    🔐 Login
+                    </button>
+
+                <button 
+                    className="btn btn-outline-warning"
+                    onClick={() => setView("register")}
+                    >
+                    🔐 Register
+                    </button>
                 </>
             )}
 
