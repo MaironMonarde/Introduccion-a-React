@@ -7,43 +7,49 @@ const Navbar = ({setView, token}) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container">
-            <a className="navbar-brand" href="#">Mamma Mía</a>
+            <a className="navbar-brand"
+                onClick={() => setView("home")}
+                style={{ cursor: "pointer" }}>
+                Mamma Mía
+            </a>
 
             <div className="d-flex gap-2">
-            {}
             <button
-                className="btn btn-outline-primary"
+                className="btn"
                 onClick={() => setView("home")}
                 >
                 🍕 Home
-                </button>
+            </button>
 
-            {}
+            <button
+                className="btn"
+                onClick={() => setView("cart")}
+            >
+                🛒 Total: ${formatNumber(total)}
+            </button>
+
             {token ? (
                 <>
-                <button className="btn btn-outline-secondary">🔓 Profile</button>
-                <button className="btn btn-outline-danger">🔒 Logout</button>
+                <button className="btn">🔓 Profile</button>
+                <button className="btn">🔒 Logout</button>
                 </>
             ) : (
                 <>
                 <button
-                    className="btn btn-outline-success"
+                    className="btn"
                     onClick={() => setView("login")}
                     >
                     🔐 Login
                     </button>
 
                 <button 
-                    className="btn btn-outline-warning"
+                    className="btn"
                     onClick={() => setView("register")}
                     >
                     🔐 Register
                     </button>
                 </>
             )}
-
-            {}
-            <button className="btn btn-outline-dark">🛒 Total: ${formatNumber(total)}</button>
             </div>
         </div>
         </nav>
