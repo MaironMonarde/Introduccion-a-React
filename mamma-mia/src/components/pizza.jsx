@@ -1,8 +1,20 @@
-
+import  {useEffect, useState} from "react";
 import { formatNumber } from "../utils/format";
 
-const CardPizza = ({ pizza }) => {
+const Pizza = () => {
+    const [pizza, setPizza] = useState(null);
 
+    useEffect(() => {
+        const getPizza = async () => {
+            const response = await fetch("http://localhost:5000/api/pizzas/1");
+            const data = await response.json();
+            setPizza(data);
+        };
+
+        getPizza();
+    }, []);
+
+    if (!pizza) return <div>Cargando...</div>;
     return (
     <div className="card card-pizza h-100">
         <img src={pizza.img} className="card-img-top" alt={pizza.name} />
@@ -21,4 +33,4 @@ const CardPizza = ({ pizza }) => {
     );
 };
 
-export default CardPizza;
+export default Pizza;

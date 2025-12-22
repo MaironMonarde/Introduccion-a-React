@@ -17,8 +17,6 @@ const App = () => {
         return <RegisterPage/>;
       case "cart":
         return <Cart/>;
-      default:
-        return <Home/>;
     }
   };
 
@@ -28,6 +26,7 @@ const App = () => {
       <main className="container my-4">
         {renderView()}
       </main>
+      <Home/>
       <Footer/>
     </>
   );

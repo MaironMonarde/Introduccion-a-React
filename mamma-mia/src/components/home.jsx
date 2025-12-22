@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./header";
 import CardPizza from "./cardpizza";
-import { pizzas } from "../assets/pizzas";
 
 const Home = () => {
+    const [pizzas, setPizzas] = useState([]);
+
+    useEffect(() => {
+        const getPizzas = async () => {
+            try {
+                const response = await fetch("http://localhost:5000/api/pizzas");
+                const data = await response.json();
+                setPizzas(data);
+            } catch (error) {
+                console.error("Error fetching pizzas:", error);
+            }
+        };
+
+        getPizzas();
+    }   , []);
+
     return (
         <>
             <Header />
@@ -13,11 +28,7 @@ const Home = () => {
                     <div className="row g-3">
                         {pizzas.map((pizza) => (
                             <div className="col-md-4 mb-3" key={pizza.id}>
-                                <CardPizza
-                                    name={pizza.name}
-                                    price={pizza.price}
-                                    ingredients={pizza.ingredients}
-                                    img={pizza.img}
+                                <CardPizza pizza={pizza}
                                 />
                             </div>
                         ))}
