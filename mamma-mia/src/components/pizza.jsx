@@ -1,5 +1,6 @@
 import  {useEffect, useState} from "react";
 import { formatNumber } from "../utils/format";
+import CapitalizedText from "./capitalizador";
 
 const Pizza = ({ pizza: pizzas}) => {
     const [pizza, setPizza] = useState(pizzas || null);
@@ -21,12 +22,12 @@ const Pizza = ({ pizza: pizzas}) => {
     <div className="card card-pizza h-100">
         <img src={pizza.img} className="card-img-top" alt={pizza.name} />
         <div className="card-body d-flex flex-column">
-            <h5 className="card-title text-center">{pizza.name}</h5>
+            <h5 className="card-title text-center"><CapitalizedText text={pizza.name} capitalizeAll={true}/></h5>
             <p className="card-text mb-1 text-center">{pizza.desc}</p>
                 <ul className="mb-3">
                 {pizza.ingredients.map((ing) => (
                     <li key={ing}>
-                        {ing}
+                        <CapitalizedText text={ing} capitalizeAll={true} />
                     </li>
                 ))}
                 </ul>
