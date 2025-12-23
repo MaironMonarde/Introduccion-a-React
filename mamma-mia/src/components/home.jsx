@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "./header";
-import CardPizza from "./cardpizza";
+import Pizza from "./pizza";
 
 const Home = () => {
     const [pizzas, setPizzas] = useState([]);
@@ -28,7 +28,7 @@ const Home = () => {
                     <div className="row g-3">
                         {pizzas.map((pizza) => (
                             <div className="col-md-4 mb-3" key={pizza.id}>
-                                <CardPizza pizza={pizza}
+                                <Pizza pizza={pizza}
                                 />
                             </div>
                         ))}

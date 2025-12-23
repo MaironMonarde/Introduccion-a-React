@@ -1,18 +1,20 @@
 import  {useEffect, useState} from "react";
 import { formatNumber } from "../utils/format";
 
-const Pizza = () => {
-    const [pizza, setPizza] = useState(null);
+const Pizza = ({ pizza: pizzas}) => {
+    const [pizza, setPizza] = useState(pizzas || null);
 
     useEffect(() => {
-        const getPizza = async () => {
-            const response = await fetch("http://localhost:5000/api/pizzas/1");
-            const data = await response.json();
-            setPizza(data);
-        };
 
-        getPizza();
-    }, []);
+        if (!pizzas) {
+            const getPizza = async () => {
+                const response = await fetch(`http://localhost:5000/api/pizzas/001`);
+                const data = await response.json();
+                setPizza(data);
+            };
+            getPizza();
+        }
+    }, [pizzas]);
 
     if (!pizza) return <div>Cargando...</div>;
     return (
@@ -20,6 +22,7 @@ const Pizza = () => {
         <img src={pizza.img} className="card-img-top" alt={pizza.name} />
         <div className="card-body d-flex flex-column">
             <h5 className="card-title text-center">{pizza.name}</h5>
+            <p className="card-text mb-1 text-center">{pizza.desc}</p>
                 <ul className="mb-3">
                 {pizza.ingredients.map((ing) => (
                     <li key={ing}>
@@ -28,6 +31,10 @@ const Pizza = () => {
                 ))}
                 </ul>
             <p className="card-text mb-1 text-center"><strong>{`Precio: $${formatNumber(pizza.price)}`}</strong></p>
+            <button className="btn btn-primary mt-auto"
+            onClick={() => alert("¡Pizza añadida al carrito con éxito!")}
+            >Agregar al carrito</button>
+
         </div>
     </div>
     );
